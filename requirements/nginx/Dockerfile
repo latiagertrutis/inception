@@ -6,5 +6,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && rm -rf /var/lib/apt/lists/*
 
 COPY nginx.conf /etc/nginx/nginx.conf
+COPY cert.pem /etc/ssl/cert.pem
+COPY key.pem /etc/ssl/key.pem
 
 ENTRYPOINT [ "/bin/bash" ]
