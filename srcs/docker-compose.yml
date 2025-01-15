@@ -1,0 +1,16 @@
+services:
+  nginx:
+    hostname: inception-nginx
+    container_name: inception-nginx
+    build: ./requirements/nginx
+    ports:
+      - "8087:443"
+    networks:
+      inception:
+        ipv4_address: 172.18.0.3
+
+networks:
+  inception:
+    driver: bridge
+    config:
+      - subnet: "172.18.0.0/24"
