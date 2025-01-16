@@ -1,5 +1,6 @@
 FROM debian:11
 
+# TODO: Fix this
 # ADD https://wordpress.org/latest.tar.gz /srv/www/
 
 # RUN tar -C /srv/www/ -zxvf /srv/www/latest.tar.gz && rm -f /srv/www/latest.tar.gz
@@ -7,6 +8,8 @@ FROM debian:11
 RUN apt-get update && apt-get install -y --no-install-recommends \
     php-fpm=2:7.4+76 \
     php-mysqli \
+    curl \
+    iputils-ping \
     && rm -rf /var/lib/apt/lists/* \
     && mkdir -p /run/php
 

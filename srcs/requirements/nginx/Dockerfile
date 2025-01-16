@@ -3,6 +3,7 @@ FROM debian:11
 RUN apt-get update && apt-get install -y --no-install-recommends \
     nginx \
     curl \
+    iputils-ping \
     && rm -rf /var/lib/apt/lists/*
 
 RUN mkdir -p /etc/ssl && echo -n "password" > /etc/ssl/password
