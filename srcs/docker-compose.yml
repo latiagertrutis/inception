@@ -7,35 +7,30 @@ services:
     ports:
       - "8087:443"
     networks:
-      inception:
-        # TODO: Do not use hardoded ips
-        ipv4_address: 172.18.0.3
+      - inception
     volumes:
       - /home/mateo/workspace/inception/srcs/requirements/wordpress/wordpress:/srv/www/wordpress/
+
   mariadb:
     hostname: inception-mariadb
     image: inception-mariadb
     container_name: inception-mariadb
     build: ./requirements/mariadb
     networks:
-      inception:
-        ipv4_address: 172.18.0.5
+      - inception
+
   wordpress:
     hostname: inception-wordpress
     image: inception-wordpress
     container_name: inception-wordpress
     build: ./requirements/wordpress
     networks:
-      inception:
-        ipv4_address: 172.18.0.4
+      - inception
     volumes:
       - /home/mateo/workspace/inception/srcs/requirements/wordpress/wordpress:/srv/www/wordpress/
       # TODO: Delete thos line, think best solution
       - /home/mateo/workspace/inception/srcs/requirements/wordpress/www.conf:/etc/php/7.4/fpm/pool.d/www.conf
+
 networks:
   inception:
     name: inception
-    ipam:
-      driver: default
-      config:
-        - subnet: 172.18.0.0/24
