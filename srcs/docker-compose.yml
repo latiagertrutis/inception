@@ -4,6 +4,7 @@ services:
     image: inception-nginx
     container_name: inception-nginx
     build: ./requirements/nginx
+    env_file: variables.env
     ports:
       - "8087:443"
     networks:
@@ -16,6 +17,7 @@ services:
     image: inception-mariadb
     container_name: inception-mariadb
     build: ./requirements/mariadb
+    env_file: variables.env
     networks:
       - inception
 
@@ -24,6 +26,7 @@ services:
     image: inception-wordpress
     container_name: inception-wordpress
     build: ./requirements/wordpress
+    env_file: variables.env
     networks:
       - inception
     volumes:

@@ -2,14 +2,14 @@ FROM debian:11
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
     nginx \
-    curl \
-    iputils-ping \
     && rm -rf /var/lib/apt/lists/*
 
-RUN mkdir -p /etc/ssl && echo -n "password" > /etc/ssl/password
+COPY entrypoint.sh /
+RUN chmod +x entrypoint.sh
 
-COPY nginx.conf /etc/nginx/nginx.conf
-COPY cert.pem /etc/ssl/cert.pem
-COPY key.pem /etc/ssl/key.pem
+COPY nginx.conf /etc/nginx/
+COPY cert.pem /etc/ssl/
+COPY key.pem /etc/ssl/
 
-ENTRYPOINT [ "nginx", "-g", "daemon off;" ]
+ENTRYPOINT [ "/entrypoint.sh" ]
+CMD [ "nginx", "-g", "daemon off;" ]

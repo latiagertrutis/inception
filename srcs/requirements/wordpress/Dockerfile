@@ -8,12 +8,10 @@ FROM debian:11
 RUN apt-get update && apt-get install -y --no-install-recommends \
     php-fpm=2:7.4+76 \
     php-mysqli \
-    curl \
-    iputils-ping \
-    && rm -rf /var/lib/apt/lists/* \
-    && mkdir -p /run/php
+    && rm -rf /var/lib/apt/lists/*
+
+RUN mkdir -p /run/php
 
 WORKDIR /srv/www/wordpress
 
 ENTRYPOINT [ "php-fpm7.4", "-F" ]
-# ENTRYPOINT [ "bash" ]

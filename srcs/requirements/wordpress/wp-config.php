@@ -23,10 +23,10 @@
 define( 'DB_NAME', 'wordpress' );
 
 /** Database username */
-define( 'DB_USER', 'wpuser' );
+define( 'DB_USER', getenv('MYSQL_USER'));
 
 /** Database password */
-define( 'DB_PASSWORD', 'password' );
+define( 'DB_PASSWORD', getenv('MYSQL_PASSWORD'));
 
 /** Database hostname */
 define( 'DB_HOST', 'inception-mariadb' );
