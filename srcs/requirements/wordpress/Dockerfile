@@ -1,16 +1,14 @@
 FROM debian:11
 
-# TODO: Fix this
-# ADD https://wordpress.org/latest.tar.gz /srv/www/
-
-# RUN tar -C /srv/www/ -zxvf /srv/www/latest.tar.gz && rm -f /srv/www/latest.tar.gz
-
 RUN apt-get update && apt-get install -y --no-install-recommends \
     php-fpm=2:7.4+76 \
     php-mysqli \
     && rm -rf /var/lib/apt/lists/*
 
 RUN mkdir -p /run/php
+
+COPY wp-config.php /srv/www/wordpress/
+COPY www.conf /etc/php/7.4/fpm/pool.d/
 
 WORKDIR /srv/www/wordpress
 

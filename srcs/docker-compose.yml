@@ -31,8 +31,6 @@ services:
       - inception
     volumes:
       - /home/mateo/workspace/inception/srcs/requirements/wordpress/wordpress:/srv/www/wordpress/
-      # TODO: Delete thos line, think best solution
-      - /home/mateo/workspace/inception/srcs/requirements/wordpress/www.conf:/etc/php/7.4/fpm/pool.d/www.conf
 
 networks:
   inception:
