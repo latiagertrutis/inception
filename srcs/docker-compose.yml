@@ -6,10 +6,11 @@ services:
     build: ./requirements/nginx
     env_file: variables.env
     ports:
-      - "8087:443"
+      - "443:443"
     networks:
       - inception
     volumes:
+      # TODO: Change when testing in VM
       - /home/mateo/workspace/inception/srcs/requirements/wordpress/wordpress:/srv/www/wordpress/
 
   mariadb:
@@ -20,6 +21,9 @@ services:
     env_file: variables.env
     networks:
       - inception
+    volumes:
+      # TODO: Change when testing in VM
+      - /home/mateo/workspace/inception/srcs/requirements/mariadb/data:/var/lib/mysql
 
   wordpress:
     hostname: inception-wordpress
@@ -30,6 +34,7 @@ services:
     networks:
       - inception
     volumes:
+      # TODO: Change when testing in VM
       - /home/mateo/workspace/inception/srcs/requirements/wordpress/wordpress:/srv/www/wordpress/
 
 networks:
