@@ -46,6 +46,14 @@ services:
       # TODO: Change when testing in VM
       - /home/mateo/workspace/inception/srcs/requirements/wordpress/wordpress:/srv/www/wordpress/
 
+  redis:
+    hostname: inception-redis
+    image: inception-redis
+    container_name: inception-redis
+    build: ./requirements/redis
+    networks:
+      - inception
+
 networks:
   inception:
     name: inception
