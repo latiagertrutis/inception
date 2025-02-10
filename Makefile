@@ -1,4 +1,4 @@
-include ./srcs/variables.env
+include ./srcs/.env
 
 COMPOSE_ROOT = ./srcs
 

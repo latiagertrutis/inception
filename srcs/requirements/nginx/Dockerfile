@@ -8,8 +8,8 @@ COPY entrypoint.sh /
 RUN chmod +x entrypoint.sh
 
 COPY nginx.conf /etc/nginx/
-COPY cert.pem /etc/ssl/
-COPY key.pem /etc/ssl/
+COPY ${SSL_CERT} /etc/ssl/
+COPY ${SSL_CERT_KEY} /etc/ssl/
 
 ENTRYPOINT [ "/entrypoint.sh" ]
 CMD [ "nginx", "-g", "daemon off;" ]

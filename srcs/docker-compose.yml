@@ -4,11 +4,14 @@ services:
     image: inception-nginx
     container_name: inception-nginx
     build: ./requirements/nginx
-    env_file: variables.env
     ports:
       - "443:443"
     networks:
       - inception
+    environment:
+      - SSL_PASSWORD=${SSL_PASSWORD?error}
+      - SSL_CERT=${SSL_CERT?error}
+      - SSL_CERT_KEY=${SSL_CERT_KEY?error}
     volumes:
       # TODO: Change when testing in VM
       - /home/mateo/workspace/inception/srcs/requirements/wordpress/wordpress:/srv/www/wordpress/
@@ -18,9 +21,13 @@ services:
     image: inception-mariadb
     container_name: inception-mariadb
     build: ./requirements/mariadb
-    env_file: variables.env
     networks:
       - inception
+    environment:
+      - MYSQL_ROOT_USER=${MYSQL_ROOT_USER?error}
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD?error}
+      - MYSQL_USER=${MYSQL_USER?error}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD?error}
     volumes:
       # TODO: Change when testing in VM
       - /home/mateo/workspace/inception/srcs/requirements/mariadb/data:/var/lib/mysql
@@ -30,9 +37,11 @@ services:
     image: inception-wordpress
     container_name: inception-wordpress
     build: ./requirements/wordpress
-    env_file: variables.env
     networks:
       - inception
+    environment:
+      - MYSQL_USER=${MYSQL_USER?error}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD?error}
     volumes:
       # TODO: Change when testing in VM
       - /home/mateo/workspace/inception/srcs/requirements/wordpress/wordpress:/srv/www/wordpress/
