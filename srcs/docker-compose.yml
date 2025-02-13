@@ -54,6 +54,21 @@ services:
     networks:
       - inception
 
+  ftp:
+    hostname: inception-ftp
+    image: inception-ftp
+    container_name: inception-ftp
+    build: ./requirements/ftp
+    ports:
+      - "20-21:20-21"
+      - "9090-9099:9090-9099"
+    environment:
+      - FTP_USER=${FTP_USER?error}
+      - FTP_PASSWORD=${FTP_PASSWORD?error}
+    volumes:
+      # TODO: Change when testing in VM
+      - /home/mateo/workspace/inception/srcs/requirements/wordpress/wordpress:/home/${FTP_USER?error}
+
 networks:
   inception:
     name: inception
