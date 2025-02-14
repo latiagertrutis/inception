@@ -6,6 +6,7 @@ services:
     build: ./requirements/nginx
     ports:
       - "443:443"
+      - "8080:8080"
     networks:
       - inception
     environment:
@@ -15,6 +16,7 @@ services:
     volumes:
       # TODO: Change when testing in VM
       - /home/mateo/workspace/inception/srcs/requirements/wordpress/wordpress:/srv/www/wordpress/
+      - /home/mateo/workspace/inception/srcs/requirements/static/bellard:/srv/www/bellard/
 
   mariadb:
     hostname: inception-mariadb
