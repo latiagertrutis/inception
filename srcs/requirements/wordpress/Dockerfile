@@ -28,6 +28,7 @@ RUN chmod +x entrypoint.sh
 
 COPY www.conf /etc/php/7.4/fpm/pool.d/
 COPY wp-config.php /
+COPY adminer-4.8.1.php /
 COPY --from=unpack /wordpress /wordpress
 COPY --from=unpack /redis-cache /redis-cache
 
