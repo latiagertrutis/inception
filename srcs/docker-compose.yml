@@ -29,6 +29,8 @@ services:
       - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD?error}
       - MYSQL_USER=${MYSQL_USER?error}
       - MYSQL_PASSWORD=${MYSQL_PASSWORD?error}
+      - MYSQL_MAIL_USER=${MYSQL_MAIL_USER?error}
+      - MYSQL_MAIL_PASSWORD=${MYSQL_MAIL_PASSWORD?error}
     volumes:
       # TODO: Change when testing in VM
       - /home/mateo/workspace/inception/srcs/requirements/mariadb/data:/var/lib/mysql
@@ -69,6 +71,19 @@ services:
     volumes:
       # TODO: Change when testing in VM
       - /home/mateo/workspace/inception/srcs/requirements/wordpress/wordpress:/home/${FTP_USER?error}
+
+  mail:
+    hostname: inception-mail
+    image: inception-mail
+    container_name: inception-mail
+    build: ./requirements/mail
+    networks:
+      - inception
+    ports:
+      - "7070:7070"
+    environment:
+      - MYSQL_MAIL_USER=${MYSQL_MAIL_USER?error}
+      - MYSQL_MAIL_PASSWORD=${MYSQL_MAIL_PASSWORD?error}
 
 networks:
   inception:

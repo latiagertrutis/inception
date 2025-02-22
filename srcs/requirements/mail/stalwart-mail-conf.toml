@@ -1,0 +1,82 @@
+[server.listener.smtp]
+bind = "[::]:25"
+protocol = "smtp"
+
+[server.listener.submission]
+bind = "[::]:587"
+protocol = "smtp"
+
+[server.listener.submissions]
+bind = "[::]:465"
+protocol = "smtp"
+tls.implicit = true
+
+[server.listener.imap]
+bind = "[::]:143"
+protocol = "imap"
+
+[server.listener.imaptls]
+bind = "[::]:993"
+protocol = "imap"
+tls.implicit = true
+
+[server.listener.pop3]
+bind = "[::]:110"
+protocol = "pop3"
+
+[server.listener.pop3s]
+bind = "[::]:995"
+protocol = "pop3"
+tls.implicit = true
+
+[server.listener.sieve]
+bind = "[::]:4190"
+protocol = "managesieve"
+
+[server.listener.https]
+protocol = "http"
+bind = "[::]:443"
+tls.implicit = true
+
+[server.listener.http]
+protocol = "http"
+bind = "[::]:7070"
+
+[storage]
+data = "mysql"
+fts = "mysql"
+blob = "mysql"
+lookup = "mysql"
+directory = "internal"
+
+[store."mysql"]
+type = "mysql"
+host = "inception-mariadb"
+port = 3306
+database = "stalwartmail"
+user = "stalwart"
+password = "password3"
+max-allowed-packet = 1073741824
+timeout = "15s"
+# user = "%{env:MYSQL_MAIL_USER}%"
+# password = "%{env:MYSQL_MAIL_PASSWORD}%"
+
+[store."mysql".query]
+name = "SELECT name, type, secret, description, quota FROM accounts WHERE name = ? AND active = true"
+members = "SELECT member_of FROM group_members WHERE name = ?"
+recipients = "SELECT name FROM emails WHERE address = ? ORDER BY name ASC"
+emails = "SELECT address FROM emails WHERE name = ? ORDER BY type DESC, address ASC"
+
+[directory.internal]
+type = "internal"
+store = "mysql"
+
+[tracer.log]
+type = "console"
+level = "trace"
+ansi = false
+enable = true
+
+[authentication.fallback-admin]
+user = "admin"
+secret = "$6$VA8O2jFFY0Tx6kil$9gfVJVhjQTYEkH50F31EvFeANLSKWFoj/7JwHtiG9xM5mVwDbqPQ4LQXamrpuOlhtq.ZJk8k1gkXLl6SK1Szi/"
