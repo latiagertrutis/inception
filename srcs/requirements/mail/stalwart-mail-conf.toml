@@ -51,15 +51,13 @@ directory = "internal"
 
 [store."mysql"]
 type = "mysql"
-host = "inception-mariadb"
+host = "mariadb"
 port = 3306
 database = "stalwartmail"
-user = "stalwart"
-password = "password3"
+user = "%{env:MYSQL_MAIL_USER}%"
+password = "%{env:MYSQL_MAIL_PASSWORD}%"
 max-allowed-packet = 1073741824
 timeout = "15s"
-# user = "%{env:MYSQL_MAIL_USER}%"
-# password = "%{env:MYSQL_MAIL_PASSWORD}%"
 
 [store."mysql".query]
 name = "SELECT name, type, secret, description, quota FROM accounts WHERE name = ? AND active = true"
@@ -77,6 +75,7 @@ level = "trace"
 ansi = false
 enable = true
 
+# TODO: Remove credentials from this file
 [authentication.fallback-admin]
 user = "admin"
 secret = "$6$VA8O2jFFY0Tx6kil$9gfVJVhjQTYEkH50F31EvFeANLSKWFoj/7JwHtiG9xM5mVwDbqPQ4LQXamrpuOlhtq.ZJk8k1gkXLl6SK1Szi/"

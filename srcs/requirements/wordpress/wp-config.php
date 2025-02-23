@@ -29,7 +29,7 @@ define( 'DB_USER', getenv('MYSQL_USER'));
 define( 'DB_PASSWORD', getenv('MYSQL_PASSWORD'));
 
 /** Database hostname */
-define( 'DB_HOST', 'inception-mariadb' );
+define( 'DB_HOST', 'mariadb' );
 
 /** Database charset to use in creating database tables. */
 define( 'DB_CHARSET', 'utf8' );
@@ -38,7 +38,7 @@ define( 'DB_CHARSET', 'utf8' );
 define( 'DB_COLLATE', '' );
 
 // ** Redis settings ** //
-define( 'WP_REDIS_HOST', 'inception-redis' );
+define( 'WP_REDIS_HOST', 'redis' );
 define( 'WP_REDIS_PORT', 6379 );
 define( 'FS_METHOD', 'direct' );
 
