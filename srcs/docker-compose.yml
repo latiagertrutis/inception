@@ -4,6 +4,7 @@ services:
     image: nginx
     container_name: nginx
     build: ./requirements/nginx
+    restart: on-failure
     ports:
       - "443:443"
       - "8080:8080"
@@ -22,6 +23,7 @@ services:
     image: mariadb
     container_name: mariadb
     build: ./requirements/mariadb
+    restart: on-failure
     networks:
       - network1
     environment:
@@ -41,6 +43,7 @@ services:
     image: wordpress
     container_name: wordpress
     build: ./requirements/wordpress
+    restart: on-failure
     networks:
       - network1
     environment:
@@ -55,6 +58,7 @@ services:
     image: redis
     container_name: redis
     build: ./requirements/redis
+    restart: on-failure
     networks:
       - network1
 
@@ -63,6 +67,7 @@ services:
     image: ftp
     container_name: ftp
     build: ./requirements/ftp
+    restart: on-failure
     ports:
       - "20-21:20-21"
       - "9090-9099:9090-9099"
@@ -78,6 +83,7 @@ services:
     image: mail
     container_name: mail
     build: ./requirements/mail
+    restart: on-failure
     networks:
       - network1
     ports:

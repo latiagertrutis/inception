@@ -5,6 +5,9 @@ COMPOSE_ROOT = ./srcs
 up:
 	@$(MAKE) -C $(COMPOSE_ROOT) -f compose.mk up
 
+up-build:
+	@$(MAKE) -C $(COMPOSE_ROOT) -f compose.mk up-build
+
 down:
 	@$(MAKE) -C $(COMPOSE_ROOT) -f compose.mk down
 
@@ -17,4 +20,4 @@ clean:
 	docker image prune -af
 	docker network remove $(NETWORK_NAME) -f
 
-.PHONY: up down domain clean
+.PHONY: up up-build down domain clean
