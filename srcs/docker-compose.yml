@@ -92,6 +92,8 @@ services:
     environment:
       - MYSQL_MAIL_USER=${MYSQL_MAIL_USER?error}
       - MYSQL_MAIL_PASSWORD=${MYSQL_MAIL_PASSWORD?error}
+      - MAIL_USER=${MAIL_USER?error}
+      - MAIL_PASSWORD=${MAIL_PASSWORD?error}
 
 networks:
   network1:

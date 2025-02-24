@@ -75,7 +75,6 @@ level = "debug"
 ansi = false
 enable = true
 
-# TODO: Remove credentials from this file
 [authentication.fallback-admin]
-user = "admin"
-secret = "$6$VA8O2jFFY0Tx6kil$9gfVJVhjQTYEkH50F31EvFeANLSKWFoj/7JwHtiG9xM5mVwDbqPQ4LQXamrpuOlhtq.ZJk8k1gkXLl6SK1Szi/"
+user = "%{env:MAIL_USER}%"
+secret = "%{env:MAIL_PASSWORD}%"
