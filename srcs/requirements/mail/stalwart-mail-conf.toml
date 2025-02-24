@@ -71,7 +71,7 @@ store = "mysql"
 
 [tracer.log]
 type = "console"
-level = "trace"
+level = "debug"
 ansi = false
 enable = true
 

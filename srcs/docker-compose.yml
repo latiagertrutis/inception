@@ -17,6 +17,7 @@ services:
     volumes:
       # TODO: Change when testing in VM
       - ${WORDPRESS_VOLUME?error}:/srv/www/wordpress/
+      - ${STATIC_SITE_VOLUME?error}:/srv/www/bellard/
 
   mariadb:
     hostname: mariadb

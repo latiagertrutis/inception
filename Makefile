@@ -15,9 +15,9 @@ domain:
 	grep -q "$(DOMAIN)" /etc/hosts || echo "127.0.0.1 $(DOMAIN)" >> /etc/hosts
 
 clean:
-	sudo rm -rf $(WORDPRESS_VOLUME) $(MARIADB_VOLUME)
-	docker container prune -f
-	docker image prune -af
+	sudo rm -rf $(WORDPRESS_VOLUME) $(MARIADB_VOLUME) $(STATIC_SITE_VOLUME)
+	docker image rm -f nginx mariadb wordpress redis ftp mail
+	docker container rm -f nginx mariadb wordpress redis ftp mail
 	docker network remove $(NETWORK_NAME) -f
 
 .PHONY: up up-build down domain clean
