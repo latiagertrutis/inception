@@ -9,8 +9,8 @@ ADD https://downloads.wordpress.org/plugin/redis-cache.2.5.4.zip /
 RUN unzip /redis-cache.2.5.4.zip -d / && rm -f /redis-cache.2.5.4.zip
 
 # Wordpress site
-ADD https://wordpress.org/latest.tar.gz /
-RUN tar -C / -zxvf /latest.tar.gz && rm -f /latest.tar.gz
+ADD https://wordpress.org/wordpress-6.7.2.tar.gz /
+RUN tar -C / -zxvf /wordpress-6.7.2.tar.gz && rm -f /wordpress-6.7.2.tar.gz
 
 
 FROM debian:11
