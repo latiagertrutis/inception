@@ -18,8 +18,8 @@ domain:
 	fi
 
 dependencies:
-	if { command -v apt && command -v dpkg-query; } &>/dev/null; then \
-		if ! dpkg-query -W $(DEPENDENCIES) &>/dev/null; then \
+	if { command -v apt && command -v dpkg-query; } >/dev/null; then \
+		if ! dpkg-query -W $(DEPENDENCIES) >/dev/null; then \
 			sudo apt-get update; \
 			sudo apt-get install -y --no-install-recommends $(DEPENDENCIES); \
 		fi \
