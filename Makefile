@@ -1,7 +1,7 @@
 include ./srcs/.env
 
 COMPOSE_ROOT = ./srcs
-DEPENDENCIES = make docker.io
+DEPENDENCIES = docker.io
 
 up: domain dependencies
 	@$(MAKE) -C $(COMPOSE_ROOT) -f compose.mk up
@@ -14,7 +14,7 @@ down:
 
 domain:
 	if ! grep -q "$(DOMAIN)" /etc/hosts; then \
-		echo "127.0.0.1 $(DOMAIN)" >> /etc/hosts; \
+		sudo echo "127.0.0.1 $(DOMAIN)" >> /etc/hosts; \
 	fi
 
 dependencies:
