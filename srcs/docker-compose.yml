@@ -63,6 +63,7 @@ services:
     networks:
       - network1
 
+# Remember enter passive mode from client side!
   ftp:
     hostname: ftp
     image: ftp
