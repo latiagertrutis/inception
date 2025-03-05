@@ -43,4 +43,4 @@ clean:
 	docker container rm -f nginx mariadb wordpress redis ftp mail
 	docker network remove $(NETWORK_NAME) -f
 
-.PHONY: up up-build down domain clean
+.PHONY: up up-build down domain vm-dependencies clean
