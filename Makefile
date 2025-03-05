@@ -32,7 +32,7 @@ vm-dependencies:
 		sudo systemctl enable docker --now; \
 		sudo groupadd -f docker; \
 		sudo usermod -aG docker $(USER); \
-		@echo "User $(USER) added to docker group, logout for this to take efect!"
+		@echo "User $(USER) added to docker group, logout for this to take efect!" ; \
 	else \
 		echo "apt not available, install dependencies manually!"; \
 	fi
