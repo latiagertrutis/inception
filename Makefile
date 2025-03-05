@@ -1,28 +1,38 @@
 include ./srcs/.env
 
 COMPOSE_ROOT = ./srcs
-DEPENDENCIES = docker.io
+DEPENDENCIES =	firefox ca-certificates curl
 
-up: domain dependencies
+up: domain
 	@$(MAKE) -C $(COMPOSE_ROOT) -f compose.mk up
 
-up-build: domain dependencies
+up-build: domain
 	@$(MAKE) -C $(COMPOSE_ROOT) -f compose.mk up-build
 
 down:
 	@$(MAKE) -C $(COMPOSE_ROOT) -f compose.mk down
 
 domain:
+	@echo "Adding to $(DOMAIN) /etc/hosts..."
 	if ! grep -q "$(DOMAIN)" /etc/hosts; then \
-		sudo echo "127.0.0.1 $(DOMAIN)" >> /etc/hosts; \
+		echo "127.0.0.1 $(DOMAIN)" | sudo tee -a /etc/hosts; \
 	fi
 
-dependencies:
+vm-dependencies:
+	@echo "Installing required dependencies for the vm"
 	if { command -v apt && command -v dpkg-query; } >/dev/null; then \
-		if ! dpkg-query -W $(DEPENDENCIES) >/dev/null; then \
-			sudo apt-get update; \
-			sudo apt-get install -y --no-install-recommends $(DEPENDENCIES); \
-		fi \
+		sudo apt-get update; \
+		sudo apt-get install -y --no-install-recommends $(DEPENDENCIES); \
+		sudo install -m 0755 -d /etc/apt/keyrings; \
+		sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc; \
+		sudo chmod a+r /etc/apt/keyrings/docker.asc; \
+		echo "deb [arch=$$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu $$(. /etc/os-release && echo "$${UBUNTU_CODENAME:-$$VERSION_CODENAME}") stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null; \
+		sudo apt-get update; \
+		sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin; \
+		sudo systemctl enable docker --now; \
+		sudo groupadd -f docker; \
+		sudo usermod -aG docker $(USER); \
+		@echo "User $(USER) added to docker group, logout for this to take efect!"
 	else \
 		echo "apt not available, install dependencies manually!"; \
 	fi
