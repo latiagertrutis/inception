@@ -3,7 +3,11 @@ services:
     hostname: nginx
     image: nginx
     container_name: nginx
-    build: ./requirements/nginx
+    build:
+      context: ./requirements/nginx
+      args:
+        - SSL_CERT=${SSL_CERT?error}
+        - SSL_CERT_KEY=${SSL_CERT_KEY?error}
     restart: on-failure
     ports:
       - "443:443"
@@ -12,8 +16,6 @@ services:
       - network1
     environment:
       - SSL_PASSWORD=${SSL_PASSWORD?error}
-      - SSL_CERT=${SSL_CERT?error}
-      - SSL_CERT_KEY=${SSL_CERT_KEY?error}
     volumes:
       - ${WORDPRESS_VOLUME?error}:/srv/www/wordpress/
       - ${STATIC_SITE_VOLUME?error}:/srv/www/bellard/

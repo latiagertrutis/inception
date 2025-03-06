@@ -5,6 +5,12 @@ RUN cat /bellard.tar.gz.part* > /bellard.tar.gz && tar -zxvf /bellard.tar.gz -C 
 
 FROM debian:11
 
+# Workarround to parametrize COPY:
+# https://docs.docker.com/reference/dockerfile/#environment-replacement
+ARG SSL_CERT SSL_CERT_KEY
+ENV SSL_CERT=${SSL_CERT}
+ENV SSL_CERT_KEY=${SSL_CERT_KEY}
+
 RUN apt-get update && apt-get install -y --no-install-recommends \
     nginx \
     && rm -rf /var/lib/apt/lists/*
